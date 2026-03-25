@@ -28,7 +28,37 @@ To formulate a C program to convert a decimal number into its binary equivalent 
 ### Step 8: 
    Stop
 # Program:
+#include <stdio.h>
+
+int main() {
+    int num, rem, i = 0, k;
+    int binary[32];  // Array to store binary digits
+
+    printf("Enter a decimal number: ");
+    scanf("%d", &num);
+
+    int temp = num;  // Store original number for later display
+
+    // Convert decimal to binary
+    while (temp > 0) {
+        rem = temp % 2;
+        binary[i] = rem;
+        i++;
+        temp = temp / 2;
+    }
+
+    printf("Binary equivalent: ");
+
+    // Print binary in reverse order
+    for (k = i - 1; k >= 0; k--) {
+        printf("%d", binary[k]);
+    }
+
+    return 0;
+}
 # Output:
+<img width="604" height="136" alt="image" src="https://github.com/user-attachments/assets/3afef89e-24ab-4cda-9dfc-595d0caae90c" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -67,7 +97,78 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 9: 
   Stop
 # Program:
+#include <stdio.h>
+
+int main() {
+    int m, i, j, k;
+    int min, max;
+    
+    printf("Enter the order of the square matrix: ");
+    scanf("%d", &m);
+
+    int a[m][m];
+
+    // Read matrix
+    printf("Enter the matrix elements:\n");
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < m; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+
+    // Display matrix
+    printf("\nMatrix:\n");
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < m; j++) {
+            printf("%d ", a[i][j]);
+        }
+        printf("\n");
+    }
+
+    int saddleFound = 0;
+
+    // Find saddle point
+    for (i = 0; i < m; i++) {
+
+        // Step 7.1: Find minimum in row i
+        min = a[i][0];
+        int minCol = 0;
+
+        for (j = 1; j < m; j++) {
+            if (a[i][j] < min) {
+                min = a[i][j];
+                minCol = j;
+            }
+        }
+
+        // Step 7.4: Find maximum in column minCol
+        max = a[0][minCol];
+        int maxRow = 0;
+
+        for (k = 1; k < m; k++) {
+            if (a[k][minCol] > max) {
+                max = a[k][minCol];
+                maxRow = k;
+            }
+        }
+
+        // Step 8: Check if saddle point
+        if (min == max && maxRow == i) {
+            printf("\nSaddle point found: %d at position (%d, %d)\n",
+                   min, i, minCol);
+            saddleFound = 1;
+        }
+    }
+
+    if (!saddleFound) {
+        printf("\nNo saddle point exists in the matrix.\n");
+    }
+
+    return 0;
+}
 # Output:
+<img width="843" height="325" alt="image" src="https://github.com/user-attachments/assets/6c48d1cc-477c-4840-a02f-79a9540cbc6b" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -101,7 +202,38 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 10: 
   Stop
 # Program:
+#include <stdio.h>
+
+int main() {
+    char s[100], d[100];
+    int i, j = 0, len = 0;
+
+    // Read string
+    printf("Enter a string: ");
+    scanf("%[^\n]s", s);
+
+    // Find length of the string
+    for (i = 0; s[i] != '\0'; i++) {
+        len++;
+    }
+
+    // Copy in reverse order
+    for (i = len - 1; i >= 0; i--) {
+        d[j] = s[i];
+        j++;
+    }
+
+    // Null-terminate the reversed string
+    d[j] = '\0';
+
+    // Display result
+    printf("Reversed string: %s\n", d);
+
+    return 0;
+}
 # Output:
+<img width="344" height="74" alt="image" src="https://github.com/user-attachments/assets/a46a7ee5-8c4a-4f63-b6d9-0fb9ec0e8775" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -135,7 +267,45 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 8:
   Stop
 # Program:
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char s[100];
+    int visited[256] = {0};
+    int i, j, n, count;
+
+    printf("Enter a string: ");
+    scanf("%[^\n]", s);
+
+    n = strlen(s);  // length of string
+
+    for (i = 0; i < n; i++) {
+
+        // Check if character is already counted
+        if (visited[(unsigned char)s[i]] == 0) {
+            count = 0;
+
+            // Count occurrences of s[i]
+            for (j = 0; j < n; j++) {
+                if (s[i] == s[j]) {
+                    count++;
+                }
+            }
+
+            // Print character and its count
+            printf("%c = %d\n", s[i], count);
+
+            // Mark as counted
+            visited[(unsigned char)s[i]] = 1;
+        }
+    }
+
+    return 0;
+}
 # Output:
+<img width="276" height="315" alt="image" src="https://github.com/user-attachments/assets/ba3e2dba-a834-4b4e-ada6-27c2c41a297a" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -169,7 +339,45 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 8: 
   Stop
 # Program:
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char s[100];
+    int visited[256] = {0};
+    int i, j, n, count;
+
+    printf("Enter a string: ");
+    scanf("%[^\n]", s);
+
+    n = strlen(s);  // length of string
+
+    for (i = 0; i < n; i++) {
+
+        // Check if character is already counted
+        if (visited[(unsigned char)s[i]] == 0) {
+            count = 0;
+
+            // Count occurrences of s[i]
+            for (j = 0; j < n; j++) {
+                if (s[i] == s[j]) {
+                    count++;
+                }
+            }
+
+            // Print character and its count
+            printf("%c = %d\n", s[i], count);
+
+            // Mark as counted
+            visited[(unsigned char)s[i]] = 1;
+        }
+    }
+
+    return 0;
+}
 # Output:
+<img width="241" height="317" alt="image" src="https://github.com/user-attachments/assets/87928891-0c1a-47c1-a705-39fd0b532305" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
